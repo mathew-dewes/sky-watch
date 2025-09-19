@@ -3,7 +3,7 @@
 import prisma from "../db/client"
 
 
-export async function getPosts(){
+export async function getPosts(community: string = "all", take?: number,){
 
   const posts = await prisma.post.findMany({
     include:{
@@ -11,7 +11,9 @@ export async function getPosts(){
       user: true,
       _count: true
     },
-    orderBy:{createdAt: "desc"}
+    where: community !== "all" ? {Community:{name:{equals: community}}} : {},
+    orderBy:{createdAt: "desc"},
+    take
   });
   return posts
 }

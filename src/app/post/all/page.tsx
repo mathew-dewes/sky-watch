@@ -1,3 +1,4 @@
+import Filters from "./_components/Filters"
 import PostList from "./_components/PostList"
 
 export default async function page({
@@ -11,7 +12,7 @@ export default async function page({
     <div>
       <h1>Discussions</h1>
       <div>
-        <h2>Filters go here</h2>
+      <Filters community={community}/>
       </div>
       <PostList query={community}/>
     </div>
