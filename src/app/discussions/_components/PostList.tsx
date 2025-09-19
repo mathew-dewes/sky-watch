@@ -5,6 +5,8 @@ import DateTimeStamp from "@/components/ui/DateTimeStamp"
 
 import Link from "next/link"
 import { getPosts } from "@/server/queries/post"
+import CommentCount from "@/components/ui/CommentCount"
+import LikeCount from "@/components/ui/LikeCount"
 
 
 
@@ -30,9 +32,10 @@ export default async function PostList({ query }: {
                             <div className="mt-3">
                                 <h2>{post.title}</h2>
                                 <p>{post.description}</p>
-                                <div className="flex gap-5 my-2">
-                                    <p>Likes: 0</p>
-                                    <p>Comments: {post._count.Comments}</p>
+                                <div className="flex gap-5 my-5">
+                                    <LikeCount count={post.Likes.length}/>
+                                    <CommentCount count={post.Comments.length}/>
+                          
                                 </div>
                                 <Link href={`/discussions/${post.id}`}><Button text="Read more" /></Link>
 

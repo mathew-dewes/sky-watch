@@ -10,7 +10,8 @@ export async function getPosts(community: string = "all", take?: number,){
       Community: true,
       user: true,
       _count: true,
-      Likes: true
+      Likes: true,
+      Comments: true
     },
     where: community !== "all" ? {Community:{name:{equals: community}}} : {},
     orderBy:{createdAt: "desc"},

@@ -4,6 +4,7 @@ import DateTimeStamp from "@/components/ui/DateTimeStamp";
 import LikeCount from "@/components/ui/LikeCount";
 import LocationPin from "@/components/ui/LocationPin";
 import { getPost } from "@/server/queries/post";
+import LikeButton from "./LikeButton";
 
 export default async function Post({id}:{id: string}){
 
@@ -27,7 +28,11 @@ export default async function Post({id}:{id: string}){
         <CommentCount count={1}/>
 
       </div>
+      <div className="mt-5">
+      <LikeButton postId={post.id}/>
      
+      </div>
+
 
 
     </div>
