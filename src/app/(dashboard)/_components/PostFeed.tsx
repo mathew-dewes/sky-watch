@@ -7,7 +7,7 @@ import Link from "next/link"
 
 export default async function PostFeed(){
 
-    const posts = await getPosts()
+    const posts = await getPosts("all", 3)
 
 
     return (

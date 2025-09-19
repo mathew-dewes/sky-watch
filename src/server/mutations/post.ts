@@ -18,13 +18,13 @@ export async function createPost(values: z.infer<typeof postSchema>) {
     const { title, content, community } = values;
 
     try {
-       const post = await prisma.post.create({
+     await prisma.post.create({
             data: { title, description: content, communityId: community, userId },
             include: {Community: true}
         
         });
-        revalidateTag(`posts:community=${post.Community.name}`);
-        revalidateTag("posts:all")
+        revalidatePath('/')
+        revalidatePath('/post/')
         return {
             status: "success", message: "Post created successfully"
         }

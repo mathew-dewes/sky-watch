@@ -13,7 +13,7 @@ export default async function PostList({query}:{
     query: string
 }){
 
-    const posts = await getPosts();
+    const posts = await getPosts(query);
 
 
     

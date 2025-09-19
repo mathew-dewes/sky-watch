@@ -21,15 +21,15 @@ export async function RegisterUser(values: z.infer<typeof registerUserSchema>) {
     }
 
     const { name, email, password } = values;
-    console.log(values.name, values.email, values.password);
+
 
     try {
-          const result = await auth.api.signUpEmail({
+        await auth.api.signUpEmail({
         body: {
             email, password, name, callbackURL: "/"
         }
     });
-    console.log(result);
+
     
     return {
         status: "success", message: "User created successfully"
