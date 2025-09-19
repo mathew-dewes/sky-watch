@@ -1,11 +1,12 @@
 "use server";
 
 import z from "zod";
-import { commentSchema } from "../../zod/schemas";
-import { getUserId } from "../../auth/session";
-import prisma from "../../db/prisma";
-import { revalidatePath, revalidateTag } from "next/cache";
+
+import { revalidatePath } from "next/cache";
 import { error } from "console";
+import { commentSchema } from "./schemas";
+import { getUserId } from "../auth/session";
+import prisma from "../db/client";
 
 export async function postComment(values: z.infer<typeof commentSchema>, postId: string){
     const userId = await getUserId();
@@ -17,7 +18,7 @@ export async function postComment(values: z.infer<typeof commentSchema>, postId:
                 content: comment, userId, postId
             }
         });
- revalidateTag("posts:all")
+ revalidatePath('/post')
             return {
             status: "success", message: "Post created successfully"
         }
