@@ -1,6 +1,9 @@
+import { authProtection } from "@/server/auth/session"
 
 
-export default  function page(){
+export default async function page(){
+
+  await authProtection()
 
   
   return (
