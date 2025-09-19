@@ -1,48 +1,35 @@
-"use server";
+'use server'
 
-import { getUserId } from "../auth/session";
-import prisma from "../db/client";
-import { revalidatePath } from "./revalidate";
+import { revalidatePath } from 'next/cache'
+import { getUserId } from '../auth/session'
+import prisma from '../db/client'
 
+export async function toggleLike(postId: string) {
+  const userId = await getUserId()
+  if (!userId) return
 
+  try {
+    const existingLike = await prisma.like.findUnique({
+      where: {
+        postId_userId: { userId, postId },
+      },
+    })
 
-export async function likePost(postId: string) {
-
-    const userId = await getUserId()
-    if (!userId) return
-
-    try {
-        await prisma.like.create({
-            data: {
-                userId, postId
-            }
-
-        });
-
-    } catch (error) {
-        console.log(error);
-
-
+    if (existingLike) {
+      // User already liked → unlike
+      await prisma.like.delete({
+        where: { postId_userId: { userId, postId } },
+      })
+    } else {
+      // User hasn’t liked → like
+      await prisma.like.create({
+        data: { userId, postId },
+      })
     }
 
-
-}
-
-
-export async function unLikePost(postId: string) {
-    const userId = await getUserId()
-    if (!userId) return
-    try {
-        await prisma.like.delete({
-            where: {
-                postId_userId: { userId, postId },
-            },
-        })
-    } catch (error) {
-        console.log(error);
-
-
-    }
-
-
+    await revalidatePath('/discussions')
+  } catch (error) {
+    console.error('Error toggling like:', error)
+    throw error
+  }
 }

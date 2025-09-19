@@ -1,14 +1,15 @@
 "use client";
 
-import { likePost } from "@/server/mutations/like";
+
+import { toggleLike } from "@/server/mutations/like";
 import { useTransition } from "react";
 
-export default function LikeButton({ postId }: { postId: string }) {
+export default function LikeButton({ postId, hasLiked }: { postId: string, hasLiked: boolean }) {
   const [isPending, startTransition] = useTransition();
 
   const handleClick = () => {
-    startTransition(() => likePost(postId));
+    startTransition(() => toggleLike(postId));
   };
 
-  return <button onClick={handleClick} disabled={isPending}>Like</button>;
+  return <button onClick={handleClick} disabled={isPending}>{hasLiked ? "Unlike" : "Like"}</button>;
 }
