@@ -25,7 +25,7 @@ export default async function PostFeed(){
                             <p>Likes: {post._count.Comments}</p>
                             <p>Comments: {post._count.Comments}</p>
                         </div>
-                        <Link href={`/post/${post.id}`}><Button text="Read more"/></Link>
+                        <Link href={`/discussions/${post.id}`}><Button text="Read more"/></Link>
                      
                         </div>
          

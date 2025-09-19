@@ -23,7 +23,7 @@ export default async function CommunitiyList(){
                                     </div>
                                    
                               
-                                    <Link href={`/post/all?community=${region.name}`}><Button text="View posts"/></Link>
+                                    <Link href={`/discussions?community=${region.name}`}><Button text="View posts"/></Link>
                                 </div>
                             )
                         })}

@@ -35,7 +35,7 @@ export default async function PostList({query}:{
                             <p>Likes: 0</p>
                             <p>Comments: {post._count.Comments}</p>
                         </div>
-                        <Link href={`/post/${post.id}`}><Button text="Read more"/></Link>
+                        <Link href={`/discussions/${post.id}`}><Button text="Read more"/></Link>
                      
                         </div>
          

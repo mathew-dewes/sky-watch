@@ -8,8 +8,10 @@ import { usePathname } from "next/navigation"
 
 export const pageRoutes = [
     { href: "/", text: "Home" },
+      { href: "/discussions", text: "Discussions" },
     { href: "/communities", text: "Communities" },
-    { href: "/post", text: "Post" },
+    { href: "/post", text: "Create post" },
+  
 ]
 
 type Session = typeof auth.$Infer.Session
