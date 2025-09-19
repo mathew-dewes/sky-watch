@@ -1,4 +1,5 @@
-import { formatDateTime } from "@/lib/helpers/date";
+import { formatDateTime } from "../helpers/date"
+
 
 export default function DateTimeStamp({date}:{
     date: Date

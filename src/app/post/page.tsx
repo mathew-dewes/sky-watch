@@ -11,7 +11,6 @@ export default async function page(){
     const communities = await getCommunities();
     await authProtection();
 
-console.log(communities);
     
     return (
         <div>

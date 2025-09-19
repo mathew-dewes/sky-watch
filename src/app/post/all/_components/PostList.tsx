@@ -13,7 +13,7 @@ export default async function PostList({query}:{
     query: string
 }){
 
-    const posts = await getPosts({community:query});
+    const posts = await getPosts();
 
 
     
