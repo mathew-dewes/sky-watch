@@ -9,7 +9,9 @@ export async function getPosts(community: string = "all", take?: number,){
     include:{
       Community: true,
       user: true,
-      _count: true
+      _count: true,
+      Likes: true,
+      Comments: true
     },
     where: community !== "all" ? {Community:{name:{equals: community}}} : {},
     orderBy:{createdAt: "desc"},
@@ -22,7 +24,7 @@ export async function getPosts(community: string = "all", take?: number,){
 export async function getPost(id: string){
  const post = await prisma.post.findUnique({
     where: {id},
-    include:{user: true, Community: true}
+    include:{user: true, Community: true, Likes: true}
   });
   return post
 

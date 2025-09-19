@@ -1,6 +1,8 @@
 import Avatar from "@/components/ui/Avatar"
 import Button from "@/components/ui/Button"
+import CommentCount from "@/components/ui/CommentCount"
 import DateTimeStamp from "@/components/ui/DateTimeStamp"
+import LikeCount from "@/components/ui/LikeCount"
 import LocationPin from "@/components/ui/LocationPin"
 import { getPosts } from "@/server/queries/post"
 import Link from "next/link"
@@ -21,9 +23,9 @@ export default async function PostFeed(){
                         <div className="mt-3">
                <h2>{post.title}</h2>
                         <p>{post.description}</p>
-                        <div className="flex gap-5 my-2">
-                            <p>Likes: {post._count.Comments}</p>
-                            <p>Comments: {post._count.Comments}</p>
+                        <div className="flex gap-5 my-5 items-center">
+                            <LikeCount count={post.Likes.length}/>
+                              <CommentCount count={1}/>
                         </div>
                         <Link href={`/discussions/${post.id}`}><Button text="Read more"/></Link>
                      
