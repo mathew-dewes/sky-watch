@@ -2,12 +2,14 @@
 
 
 import z from "zod";
-import { getUserId } from "../../auth/session";
-import prisma from "../../db/prisma";
-import { postSchema } from "../../zod/schemas";
+
+
 import { revalidatePath, revalidateTag } from "next/cache";
 import { error } from "console";
 import { redirect } from "next/navigation";
+import { getUserId } from "../auth/session";
+import { postSchema } from "./schemas";
+import prisma from "../db/client";
 
 
 export async function createPost(values: z.infer<typeof postSchema>) {
