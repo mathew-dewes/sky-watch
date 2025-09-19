@@ -10,7 +10,18 @@ export async function getPosts(){
       Community: true,
       user: true,
       _count: true
-    }
+    },
+    orderBy:{createdAt: "desc"}
   });
   return posts
+}
+
+
+export async function getPost(id: string){
+ const post = await prisma.post.findUnique({
+    where: {id},
+    include:{user: true, Community: true}
+  });
+  return post
+
 }
