@@ -36,7 +36,7 @@ export default function PostForm({ communities }: {
            setServerError(result.message)
             console.log(result.message);
     } else{
-              router.push("/post/all");
+              router.push("/discussions");
             router.refresh()
     }
 

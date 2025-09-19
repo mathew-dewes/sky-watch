@@ -2,12 +2,14 @@ import Avatar from "@/components/ui/Avatar";
 import DateTimeStamp from "@/components/ui/DateTimeStamp";
 import { getComments } from "@/server/queries/comment";
 import DeleteCommentButton from "./DeleteCommentButton";
+import { getUserId } from "@/server/auth/session";
 
 
 
 
 export default async function CommentList({ postId }: { postId: string }) {
 
+    const userId = await getUserId()
     const comments = await getComments(postId)
 
 
@@ -21,7 +23,9 @@ export default async function CommentList({ postId }: { postId: string }) {
                     <DateTimeStamp date={comment.createdAt} />
                     <p className="mt-2">{comment.content}</p>
                     <div className="flex justify-end">
-                       <DeleteCommentButton postId={postId} commentId={comment.id}/>
+                        {userId === comment.userId &&
+                        <DeleteCommentButton postId={postId} commentId={comment.id}/>}
+           
                     </div>
                 </div>
             })}
