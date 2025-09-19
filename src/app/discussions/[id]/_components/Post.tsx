@@ -1,5 +1,7 @@
 import Avatar from "@/components/ui/Avatar";
+import CommentCount from "@/components/ui/CommentCount";
 import DateTimeStamp from "@/components/ui/DateTimeStamp";
+import LikeCount from "@/components/ui/LikeCount";
 import LocationPin from "@/components/ui/LocationPin";
 import { getPost } from "@/server/queries/post";
 
@@ -19,8 +21,10 @@ export default async function Post({id}:{id: string}){
         <h1>{post.title}</h1>
         <p>{post.description}</p>
       </div>
-      <div className="mt-5 flex justify-end">
+      <div className="mt-5 flex gap-5">
         {/* {post.userId === userId && <DeletePostButton postId={post.id}/>} */}
+        <LikeCount count={post.Likes.length}/>
+        <CommentCount count={1}/>
 
       </div>
      
