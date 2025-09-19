@@ -19,7 +19,7 @@ export default async function page({params}:
                 <div className="mt-6">
                     <CommentForm postId={id}/>
                     <h2>Comment list:</h2>
-                    <Suspense>
+                    <Suspense fallback={<LoadingSpinner text="Loading comments..."/>}>
                         <CommentList postId={id}/>
                     </Suspense>
 

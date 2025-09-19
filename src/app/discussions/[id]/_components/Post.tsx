@@ -5,10 +5,14 @@ import LikeCount from "@/components/ui/LikeCount";
 import LocationPin from "@/components/ui/LocationPin";
 import { getPost } from "@/server/queries/post";
 import LikeButton from "./LikeButton";
+import { getUserId } from "@/server/auth/session";
 
 export default async function Post({id}:{id: string}){
 
-    const post = await getPost(id);
+  const [post, userId] = await Promise.all([getPost(id), getUserId()]);
+  
+    const hasLiked = post?.Likes.some(like => like.userId === userId) ?? false    
+    
       if (!post) return
     return (
         <div className="bg-lightdark-500 p-10 rounded w-2/3">
@@ -29,7 +33,7 @@ export default async function Post({id}:{id: string}){
 
       </div>
       <div className="mt-5">
-      <LikeButton postId={post.id}/>
+      <LikeButton hasLiked={hasLiked} postId={post.id}/>
      
       </div>
 
