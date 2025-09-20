@@ -30,7 +30,7 @@ export default function Navbar({ session }:
             <Link href={'/'}><h1 className="text-accent-500 font-bold text-2xl">Sky Watch</h1></Link>
             <ul className="hidden lg:flex gap-20">
 
-                {pageRoutes.map((route, key) => {
+                {session && pageRoutes.map((route, key) => {
                     return <Link key={key} className={`hover:text-accent-500
         ${isActive(route.href) ? "text-accent-500" : ""}
         `} href={route.href}>{route.text}</Link>
