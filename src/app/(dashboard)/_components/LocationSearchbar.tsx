@@ -6,23 +6,28 @@ import { useState } from "react";
 export default function LocationSearchbar({ cities }: { cities: string[] }) {
   const [query, setQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-    const searchParams = useSearchParams();
-      const router = useRouter();
-        const pathname = usePathname();
+  const [loading, setLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const filteredCities = cities.filter((city) =>
     city.toLowerCase().includes(query.toLowerCase())
   );
 
-    const updateUrl = (location: string) => {
+  const updateUrl = (location: string) => {
     const newParams = new URLSearchParams(searchParams?.toString());
     newParams.set("location", location);
     router.push(`${pathname}?${newParams.toString()}`);
   };
 
-  const handleSubmit = (e: React.FormEvent) =>{
-      e.preventDefault(); // prevent page reload
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault(); // prevent page reload
     if (query.trim()) updateUrl(query);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
   }
 
   const handleSelect = (city: string) => {
@@ -66,16 +71,16 @@ export default function LocationSearchbar({ cities }: { cities: string[] }) {
           onFocus={() => setShowDropdown(true)}
           onBlur={() => setTimeout(() => setShowDropdown(false), 150)} // small delay so click works
         />
-        <button
+        <button disabled={loading}
           type="submit"
           className="text-white cursor-pointer absolute end-2.5 bottom-2.5 bg-accent-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2"
         >
-          Search
+          {loading ? "Searching" : "Search"}
         </button>
 
         {/* Dropdown */}
         {showDropdown && query && filteredCities.length > 0 && (
-          <ul className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-lg max-h-60 overflow-auto shadow-lg">
+          <ul className="absolute z-10 mt-1 w-full text-black bg-white border border-gray-300 rounded-lg max-h-60 overflow-auto shadow-lg">
             {filteredCities.map((city, idx) => (
               <li
                 key={idx}

@@ -3,7 +3,8 @@
 import Button from "@/components/ui/Button"
 import ErrorMessage from "@/components/ui/ErrorMessage";
 import { createPost } from "@/server/mutations/post";
-import { postSchema } from "@/server/mutations/schemas";
+import { postSchema } from "@/server/types/schemas";
+
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Community } from "@prisma/client";

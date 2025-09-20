@@ -4,9 +4,10 @@ import z from "zod";
 
 import { revalidatePath } from "next/cache";
 import { error } from "console";
-import { commentSchema } from "./schemas";
+
 import { getUserId } from "../auth/session";
 import prisma from "../db/client";
+import { commentSchema } from "../types/schemas";
 
 export async function postComment(values: z.infer<typeof commentSchema>, postId: string){
     const userId = await getUserId();
