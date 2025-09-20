@@ -22,7 +22,7 @@ export async function getCurrentWeatherData(location: string): Promise<WeatherRe
 
 export async function getWeatherForcast(location: string): Promise<ForecastResponse>{
 
-const res = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${ApiKey}&cnt=2`,{
+const res = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${ApiKey}&cnt=9&units=metric`,{
     next: {revalidate: 3600}
 })
     if (!res.ok) throw new Error("Failed to fetch weather");

@@ -3,19 +3,40 @@ import WeatherWidget from "./(dashboard)/_components/WeatherWidget"
 import { Suspense } from "react"
 import LoadingSpinner from "@/components/ui/LoadingSpinner"
 import PostFeed from "./(dashboard)/_components/PostFeed"
+import ForcastWidget from "./(dashboard)/_components/ForcastWidget"
+import LocationSearchbar from "./(dashboard)/_components/LocationSearchbar"
+import { locations } from "./(dashboard)/_components/helpers"
 
 
-export default async function page(){
+
+
+export default async function page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string }>
+}){
+
+  const {location} = await searchParams;
+
+  console.log(location);
+  
 
   await authProtection()
 
   
   return (
     <div>
-      <h1>Home page</h1>
+      <h1>Current forcast</h1>
+      <LocationSearchbar cities={locations}/>
+
       <Suspense fallback={<LoadingSpinner text="Loading weather data..."/>}>
-      <WeatherWidget/>
+      <WeatherWidget location={location}/>
       </Suspense>
+      <div className="mt-10">
+      <h1>Hourly forcast</h1>
+      <ForcastWidget location={location} />
+      </div>
+
       <div className="mt-10">
      <h1>Latest posts:</h1>
       <Suspense fallback={<LoadingSpinner text="Loading posts..."/>}>
