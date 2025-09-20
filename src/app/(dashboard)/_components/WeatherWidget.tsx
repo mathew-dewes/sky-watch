@@ -3,7 +3,7 @@ import Image from "next/image";
 import { degreesToCompass, epochToLocal, hoursBetween } from "./helpers";
 
 
-export default async function WeatherWidget({location}:
+export default async function WeatherWidget({location = "Auckland"}:
     {location: string}
 ) {
 
