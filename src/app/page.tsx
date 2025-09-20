@@ -5,6 +5,7 @@ import LoadingSpinner from "@/components/ui/LoadingSpinner"
 import PostFeed from "./(dashboard)/_components/PostFeed"
 import LocationSearchbar from "./(dashboard)/_components/LocationSearchbar"
 import { locations } from "./(dashboard)/_components/helpers"
+import ForcastWidget from "./(dashboard)/_components/ForcastWidget"
 
 
 
@@ -27,13 +28,14 @@ export default async function page({
       <h1>Current forcast</h1>
       <LocationSearchbar cities={locations}/>
 
-      <Suspense fallback={<LoadingSpinner text="Loading weather data..."/>}>
+      <Suspense key={location} fallback={<LoadingSpinner text="Loading weather data..."/>}>
       <WeatherWidget location={location}/>
-      </Suspense>
       <div className="mt-10">
       <h1>Hourly forcast</h1>
-      {/* <ForcastWidget location={location} /> */}
+      <ForcastWidget location={location} />
       </div>
+      </Suspense>
+      
 
       <div className="mt-10">
      <h1>Latest posts:</h1>

@@ -2,7 +2,7 @@ import { getWeatherForcast } from "@/server/queries/weather";
 import {epochToLocalShort } from "./helpers";
 import Image from "next/image";
 
-export default async function ForcastWidget({location}:
+export default async function ForcastWidget({location = "Auckland"}:
     {location: string}
 ) {
 

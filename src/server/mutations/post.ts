@@ -8,8 +8,9 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { error } from "console";
 import { redirect } from "next/navigation";
 import { getUserId } from "../auth/session";
-import { postSchema } from "./schemas";
+
 import prisma from "../db/client";
+import { postSchema } from "../types/schemas";
 
 
 export async function createPost(values: z.infer<typeof postSchema>) {
