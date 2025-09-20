@@ -3,9 +3,11 @@ import Image from "next/image";
 import { degreesToCompass, epochToLocal, hoursBetween } from "./helpers";
 
 
-export default async function WeatherWidget() {
+export default async function WeatherWidget({location}:
+    {location: string}
+) {
 
-    const data = await getCurrentWeatherData("Auckland");
+    const data = await getCurrentWeatherData(location);
 
     if (!data) return <p>Sorry, there was an error fetching the weather data. Please try again later</p>
     return (

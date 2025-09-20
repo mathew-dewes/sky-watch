@@ -2,13 +2,13 @@ import { getWeatherForcast } from "@/server/queries/weather";
 import {epochToLocalShort } from "./helpers";
 import Image from "next/image";
 
-export default async function ForcastWidget() {
+export default async function ForcastWidget({location}:
+    {location: string}
+) {
 
 
-    const forcast = await getWeatherForcast("Auckland");
+    const forcast = await getWeatherForcast(location);
     const today = new Date().toLocaleDateString("en-NZ", { day: "numeric", month: "long", year: "numeric", weekday: "long" });
-
-    console.log(forcast);
     return (
         <div className="mt-3">
             <h2>{today}</h2>
