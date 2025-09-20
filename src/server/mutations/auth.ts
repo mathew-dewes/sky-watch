@@ -6,8 +6,9 @@ import z from "zod";
 import { headers } from "next/headers";
 import { APIError } from "better-auth/api";
 import { redirect } from "next/navigation";
-import { loginUserSchema, registerUserSchema } from "./schemas";
+
 import { auth } from "../auth/auth";
+import { loginUserSchema, registerUserSchema } from "../types/schemas";
 
 export async function RegisterUser(values: z.infer<typeof registerUserSchema>) {
 

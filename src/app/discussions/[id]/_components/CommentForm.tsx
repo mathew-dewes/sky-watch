@@ -3,7 +3,8 @@
 import Button from "@/components/ui/Button";
 import ErrorMessage from "@/components/ui/ErrorMessage";
 import { postComment } from "@/server/mutations/comment";
-import { commentSchema } from "@/server/mutations/schemas";
+import { commentSchema } from "@/server/types/schemas";
+
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";

@@ -15,7 +15,8 @@ import { useRouter } from 'next/navigation';
 
 import Providers from '../../_components/SocialLoginProviders';
 import { LoginUser } from '@/server/mutations/auth';
-import { loginUserSchema } from '@/server/mutations/schemas';
+import { loginUserSchema } from '@/server/types/schemas';
+
 
 
 
