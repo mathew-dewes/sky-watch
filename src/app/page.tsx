@@ -3,6 +3,7 @@ import WeatherWidget from "./(dashboard)/_components/WeatherWidget"
 import { Suspense } from "react"
 import LoadingSpinner from "@/components/ui/LoadingSpinner"
 import PostFeed from "./(dashboard)/_components/PostFeed"
+import ForcastWidget from "./(dashboard)/_components/ForcastWidget"
 
 
 export default async function page(){
@@ -12,10 +13,15 @@ export default async function page(){
   
   return (
     <div>
-      <h1>Home page</h1>
+      <h1>Current forcast</h1>
       <Suspense fallback={<LoadingSpinner text="Loading weather data..."/>}>
       <WeatherWidget/>
       </Suspense>
+      <div className="mt-10">
+      <h1>Hourly forcast</h1>
+      <ForcastWidget/>
+      </div>
+
       <div className="mt-10">
      <h1>Latest posts:</h1>
       <Suspense fallback={<LoadingSpinner text="Loading posts..."/>}>
