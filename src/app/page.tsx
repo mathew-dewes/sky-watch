@@ -4,7 +4,6 @@ import { Suspense } from "react"
 import LoadingSpinner from "@/components/ui/LoadingSpinner"
 import PostFeed from "./(dashboard)/_components/PostFeed"
 import LocationSearchbar from "./(dashboard)/_components/LocationSearchbar"
-import { locations } from "./(dashboard)/_components/helpers"
 import ForcastWidget from "./(dashboard)/_components/ForcastWidget"
 
 
@@ -26,7 +25,7 @@ export default async function page({
   return (
     <div>
       <h1>Current forcast</h1>
-      <LocationSearchbar cities={locations}/>
+      <LocationSearchbar/>
 
       <Suspense key={location} fallback={<LoadingSpinner text="Loading weather data..."/>}>
       <WeatherWidget location={location}/>
