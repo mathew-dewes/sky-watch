@@ -1,5 +1,4 @@
 "use server"
-
 import prisma from "../db/client"
 
 
@@ -16,6 +15,23 @@ export async function getPosts(community: string = "all", take?: number,){
     where: community !== "all" ? {Community:{name:{equals: community}}} : {},
     orderBy:{createdAt: "desc"},
     take
+  });
+  return posts
+}
+
+
+export async function getUserPosts(userId: string){
+  if (!userId) return
+  const posts = await prisma.post.findMany({
+    where:{
+      userId
+    },
+    include:{
+      user: true,
+      Community: true,
+      Likes: true,
+      Comments: true
+    }
   });
   return posts
 }

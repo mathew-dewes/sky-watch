@@ -1,32 +1,30 @@
-import Avatar from "@/components/ui/Avatar"
 import LocationPin from "@/components/ui/LocationPin"
 import Button from "@/components/ui/Button"
 import DateTimeStamp from "@/components/ui/DateTimeStamp"
 
 import Link from "next/link"
-import { getPosts } from "@/server/queries/post"
+import { getUserPosts } from "@/server/queries/post"
 import CommentCount from "@/components/ui/CommentCount"
 import LikeCount from "@/components/ui/LikeCount"
 
 
 
-export default async function PostList({ query }: {
-    query: string
-}) {
+export default async function UserPostList({userId}:
+    {userId: string}
+) {
 
-    const posts = await getPosts(query);
+    const posts = await getUserPosts(userId);
+    if (!posts) return <p>This user has no posts</p>
 
 
 
     return (
-        <div>
-            <p>Total posts: {posts.length}</p>
-
+        <div className="mt-5">
+        <h1>Posts:</h1>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                 {posts.map((post) => {
                     return (
                         <div className="mt-5 bg-lightdark-500 p-3 rounded" key={post.id}>
-                            <Avatar userId={post.userId} name={post.user.name} />
                             <DateTimeStamp date={post.createdAt} />
                             <LocationPin name={post.Community.name} />
                             <div className="mt-3">

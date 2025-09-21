@@ -24,6 +24,7 @@ model User {
   Likes         Like[]
   Community     Community?
   Location Location?
+  bio String?
 
   @@unique([email])
   @@map("user")
@@ -90,7 +91,7 @@ model Post {
   createdAt   DateTime @default(now())
   title String
   description String
-  user        User     @relation(fields: [userId], references: [id])
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String
   Comments Comment[]
   Likes Like[]

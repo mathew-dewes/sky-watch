@@ -1,7 +1,7 @@
 import Image from "next/image"
 
 export default function LocationPin({name}:{
-    name: string
+    name: string 
 }){
     return (
         <div className="flex items-center py-1">
