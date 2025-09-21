@@ -1,11 +1,12 @@
 import { getCurrentWeatherData } from "@/server/queries/weather"
 import Image from "next/image";
 import { degreesToCompass, epochToLocal, hoursBetween } from "./helpers";
+import LocationCheckbox from "./LocationCheckbox";
 
 
 
 
-export default async function WeatherWidget({location = "Auckland"}:
+export default async function WeatherWidget({location}:
     {location: string}
 ) {
 
@@ -16,19 +17,36 @@ export default async function WeatherWidget({location = "Auckland"}:
         <div className="mt-10">
             <div className="flex gap-2 items-center">
             <h1 className="text-3xl">{data.name}</h1>
-                      <Image width={50} height={30} alt="Weather icon" src={`https://openweathermap.org/img/wn/${data.weather[0].icon}.png`}></Image>
+          
+   
+                      <Image width={50} height={50} alt="Weather icon" src={`https://openweathermap.org/img/wn/${data.weather[0].icon}.png`}></Image>
+                      <p className="text-xl">{data.main.temp.toFixed()}°C</p>
             </div>
+              <p>{data.weather[0].description}</p>
+                     <LocationCheckbox location={location}/>
 
       
-            <div className="flex items-center gap-2 mt-3">
-                <h2>Conditions:</h2>
+            {/* <div className="flex items-center gap-2 mt-3">
+                <h2>Temperature:</h2>
     <p>{data.weather[0].description} {data.main.temp} C</p>
-            </div>
+            </div> */}
                          
           
 
 
             <div className="mt-5 flex gap-10">
+                  <div className="p-8 bg-lightdark-500 w-fit rounded-2xl text-center">
+                    <Image className="mx-auto" width={30} height={10} alt="Temperature icon" src={`/temp.png`}></Image>
+
+                    <h2 className="mt-2">Temperature</h2>
+                    <div className="mt-1">
+                        <p>Current: {data.main.temp.toFixed()}°C</p>
+                        <p>High: {data.main.temp_max.toFixed()}°C</p>
+                        <p>Low: {data.main.temp_min.toFixed()}°C</p>
+                    </div>
+
+
+                </div>
       
                 <div className="p-8 bg-lightdark-500 w-fit rounded-2xl text-center">
                     <Image className="mx-auto" width={30} height={10} alt="Rain icon" src={`/rainy.png`}></Image>

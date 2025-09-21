@@ -23,6 +23,7 @@ model User {
   Posts         Post[]
   Likes         Like[]
   Community     Community?
+  Location Location?
 
   @@unique([email])
   @@map("user")
@@ -109,6 +110,15 @@ model Community {
   Posts Post[]
   userId String @unique
 
+
+}
+
+model Location{
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  name String @unique
+  userId String @unique
+  user User @relation(fields: [userId], references: [id])
 
 }
 
