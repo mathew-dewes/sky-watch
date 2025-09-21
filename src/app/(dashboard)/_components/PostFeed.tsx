@@ -17,9 +17,12 @@ export default async function PostFeed(){
   {posts.map((post)=>{
                 return (
                     <div className="mt-5 bg-lightdark-500 p-3 rounded w-100" key={post.id}>
-                        <Avatar name={post.user.name}/>
+                        <div>
+                        <Avatar userId={post.userId} name={post.user.name}/>
                         <DateTimeStamp date={post.createdAt}/>
                         <LocationPin name={post.Community.name}/>
+                        </div>
+                   
                         <div className="mt-3">
                <h2>{post.title}</h2>
                         <p>{post.description}</p>
