@@ -32,7 +32,6 @@ export default function LocationCheckbox({location}:{
       const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
     setChecked(isChecked);
-    console.log("Checkbox checked:", isChecked);
 
     if (isChecked) {
       // Call your DB update function here

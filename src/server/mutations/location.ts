@@ -9,17 +9,18 @@ export async function updateLocation(location: string){
     if (!userId) return
 
     try {
-        const res = await prisma.location.update({
-            data:{
+      await prisma.location.upsert({
+            update:{
                name: location
             },
+        create: { userId, name: location },
             where:{
                 userId
             }
 
         });
 
-        console.log(res);
+ 
         
     } catch (error) {
         console.log(error);

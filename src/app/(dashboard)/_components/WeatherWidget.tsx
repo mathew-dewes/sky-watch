@@ -25,11 +25,6 @@ export default async function WeatherWidget({location}:
               <p>{data.weather[0].description}</p>
                      <LocationCheckbox location={location}/>
 
-      
-            {/* <div className="flex items-center gap-2 mt-3">
-                <h2>Temperature:</h2>
-    <p>{data.weather[0].description} {data.main.temp} C</p>
-            </div> */}
                          
           
 

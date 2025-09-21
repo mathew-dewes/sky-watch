@@ -27,10 +27,10 @@ export default async function page({
       <h1>Current forcast</h1>
       <LocationSearchbar/>
       <Suspense key={location} fallback={<LoadingSpinner text="Loading weather data..."/>}>
-      <WeatherWidget location={location ?? defaultLocation}/>
+      <WeatherWidget location={location ?? defaultLocation ?? "Auckland"}/>
       <div className="mt-10">
       <h1>12 Hourly forcast</h1>
-      <ForcastWidget location={location ?? defaultLocation} />
+      <ForcastWidget location={location ?? defaultLocation ?? "Auckland"} />
       </div>
       </Suspense>
       
