@@ -7,12 +7,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import z from 'zod';
 import ErrorMessage from '../../../../components/ui/ErrorMessage';
-
 import { useState } from 'react';
 import Providers from '../../_components/SocialLoginProviders';
 import { useRouter } from 'next/navigation';
-import { registerUserSchema } from '@/server/mutations/schemas';
 import { RegisterUser } from '@/server/mutations/auth';
+import { registerUserSchema } from '@/server/types/schemas';
+import LocationSearchSelector from './LocationSearchSelector';
+
 
 
 
@@ -24,7 +25,7 @@ export default function RegisterForm() {
         const [serverError, setServerError] = useState("")
 
 
-    const {register, handleSubmit, formState:{errors, isSubmitting}} =
+    const {register, setValue ,handleSubmit, formState:{errors, isSubmitting}} =
         useForm<FormFields>({resolver: zodResolver(registerUserSchema)});
 
 
@@ -63,7 +64,14 @@ export default function RegisterForm() {
                       {errors.password && 
                 <ErrorMessage message={errors.password?.message}/>}
             </div>
-  
+             <div className="mb-5 mt-10">
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Location</label>
+
+            <LocationSearchSelector setValue={setValue} register={register}/>
+            {errors.name && 
+                <ErrorMessage message={errors.location?.message}/>}
+            </div>
+
             
         <Button text='Register' isSubmitting={isSubmitting} submittingText='Submitting'/>
                 <p className="mt-5 text-red-500">{serverError}</p>

@@ -118,7 +118,7 @@ model Location{
   createdAt DateTime @default(now())
   name String @unique
   userId String @unique
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
 }
 
