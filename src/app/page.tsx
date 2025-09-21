@@ -29,7 +29,7 @@ export default async function page({
       <Suspense key={location} fallback={<LoadingSpinner text="Loading weather data..."/>}>
       <WeatherWidget location={location ?? defaultLocation}/>
       <div className="mt-10">
-      <h1>Hourly forcast</h1>
+      <h1>12 Hourly forcast</h1>
       <ForcastWidget location={location ?? defaultLocation} />
       </div>
       </Suspense>
