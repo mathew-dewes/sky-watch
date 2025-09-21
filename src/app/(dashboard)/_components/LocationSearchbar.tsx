@@ -1,19 +1,38 @@
 "use client"
 
+import { PlacePrediction } from "@/server/types/places";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function LocationSearchbar({ cities }: { cities: string[] }) {
+export default function LocationSearchbar() {
   const [query, setQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [suggestions, setSuggestions] = useState<PlacePrediction[]>([]);
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
-  const filteredCities = cities.filter((city) =>
-    city.toLowerCase().includes(query.toLowerCase())
-  );
+  console.log(suggestions[0]);
+  
+
+  
+useEffect(() => {
+  if (query.length < 2) {
+    setSuggestions([]);
+    return;
+  }
+
+  const timeout = setTimeout(async () => {
+    const res = await fetch(`/api/places?input=${encodeURIComponent(query)}`);
+    const data = await res.json();
+    setSuggestions(data.predictions || []);
+  }, 400); 
+
+  return () => clearTimeout(timeout);
+}, [query]);
+  
+
 
   const updateUrl = (location: string) => {
     const newParams = new URLSearchParams(searchParams?.toString());
@@ -22,7 +41,7 @@ export default function LocationSearchbar({ cities }: { cities: string[] }) {
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // prevent page reload
+    e.preventDefault();
     if (query.trim()) updateUrl(query);
     setLoading(true);
     setTimeout(() => {
@@ -79,15 +98,15 @@ export default function LocationSearchbar({ cities }: { cities: string[] }) {
         </button>
 
         {/* Dropdown */}
-        {showDropdown && query && filteredCities.length > 0 && (
+        {showDropdown && query && suggestions.length > 0 && (
           <ul className="absolute z-10 mt-1 w-full text-black bg-white border border-gray-300 rounded-lg max-h-60 overflow-auto shadow-lg">
-            {filteredCities.map((city, idx) => (
+            {suggestions.map((s, idx) => (
               <li
                 key={idx}
                 className="px-4 py-2 hover:bg-blue-100 cursor-pointer"
-                onMouseDown={() => handleSelect(city)}
+                onMouseDown={() => handleSelect(s.description)}
               >
-                {city}
+                {s.description}
               </li>
             ))}
           </ul>
