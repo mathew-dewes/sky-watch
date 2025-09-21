@@ -7,12 +7,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import z from 'zod';
 import ErrorMessage from '../../../../components/ui/ErrorMessage';
-
 import { useState } from 'react';
 import Providers from '../../_components/SocialLoginProviders';
 import { useRouter } from 'next/navigation';
-import { registerUserSchema } from '@/server/mutations/schemas';
 import { RegisterUser } from '@/server/mutations/auth';
+import { registerUserSchema } from '@/server/types/schemas';
 
 
 

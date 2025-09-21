@@ -20,6 +20,7 @@ export async function getUserId(){
 
 export async function getUserLocation(){
     const userId = await getUserId()
+    if (!userId) return
 
     const user = await prisma.user.findUnique({
         where:{

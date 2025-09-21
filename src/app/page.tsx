@@ -16,6 +16,7 @@ export default async function page({
   const {location} = await searchParams;
 
   const defaultLocation = await getUserLocation();
+  const locationSet = location || defaultLocation
 
 
 
@@ -25,14 +26,18 @@ export default async function page({
   return (
     <div>
       <h1>Current forcast</h1>
+
       <LocationSearchbar/>
-      <Suspense key={location} fallback={<LoadingSpinner text="Loading weather data..."/>}>
-      <WeatherWidget location={location ?? defaultLocation ?? "Auckland"}/>
+      { locationSet &&  <Suspense key={location} fallback={<LoadingSpinner text="Loading weather data..."/>}>
+      <WeatherWidget location={location ?? defaultLocation}/>
       <div className="mt-10">
       <h1>12 Hourly forcast</h1>
-      <ForcastWidget location={location ?? defaultLocation ?? "Auckland"} />
+      <ForcastWidget location={location ?? defaultLocation} />
       </div>
-      </Suspense>
+      </Suspense> 
+}
+     
+     
       
 
       <div className="mt-10">
