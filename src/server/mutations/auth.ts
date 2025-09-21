@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 
 import { auth } from "../auth/auth";
 import { loginUserSchema, registerUserSchema } from "../types/schemas";
+import prisma from "../db/client";
 
 export async function RegisterUser(values: z.infer<typeof registerUserSchema>) {
 
@@ -21,15 +22,31 @@ export async function RegisterUser(values: z.infer<typeof registerUserSchema>) {
         }
     }
 
-    const { name, email, password } = values;
+    const { name, email, password, location } = values;
 
 
     try {
-        await auth.api.signUpEmail({
+        const user = await auth.api.signUpEmail({
         body: {
             email, password, name, callbackURL: "/"
         }
     });
+
+    const userId = user.user.id;
+
+        await prisma.location.upsert({
+            update:{
+               name: location
+            },
+        create: { userId, name: location },
+            where:{
+                userId
+            }
+
+        });
+    
+    console.log(user.user.id);
+    
 
     
     return {
