@@ -22,30 +22,33 @@ export async function RegisterUser(values: z.infer<typeof registerUserSchema>) {
         }
     }
 
-    const { name, email, password, location } = values;
+    const { name, email, password, location, bio } = values;
 
 
     try {
         const user = await auth.api.signUpEmail({
         body: {
-            email, password, name, callbackURL: "/"
+            email, password, name, callbackURL: "/",
         }
     });
 
     const userId = user.user.id;
 
-        await prisma.location.upsert({
-            update:{
-               name: location
-            },
-        create: { userId, name: location },
-            where:{
-                userId
-            }
 
-        });
-    
-    console.log(user.user.id);
+    await prisma.user.update({
+        data:{
+            bio,
+            Location:{
+                create:{
+                    name: location
+                }
+            }
+        },
+        where:{
+            id: userId
+        }
+    })
+
     
 
     

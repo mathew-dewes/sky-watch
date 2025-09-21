@@ -9,7 +9,8 @@ export async function getUserInfo(userId: string){
         },
         select:{
             name: true,
-            Location: true
+            Location: true,
+            bio: true
         }
 
     })

@@ -14,7 +14,7 @@ export default async function page({params}:
   return (
     <div>
     <UserProfile userId={userId}/>
-      <h1>Posts:</h1>
+
     <UserPostList userId={userId}/>
     </div>
   )

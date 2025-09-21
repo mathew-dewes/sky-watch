@@ -19,7 +19,8 @@ export default async function UserPostList({userId}:
 
 
     return (
-        <div>
+        <div className="mt-5">
+        <h1>Posts:</h1>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                 {posts.map((post) => {
                     return (
