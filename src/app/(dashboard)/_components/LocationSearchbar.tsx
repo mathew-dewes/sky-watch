@@ -12,10 +12,6 @@ export default function LocationSearchbar() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-
-  console.log(suggestions[0]);
-  
-
   
 useEffect(() => {
   if (query.length < 2) {

@@ -1,11 +1,12 @@
 import { getCurrentWeatherData } from "@/server/queries/weather"
 import Image from "next/image";
 import { degreesToCompass, epochToLocal, hoursBetween } from "./helpers";
+import LocationCheckbox from "./LocationCheckbox";
 
 
 
 
-export default async function WeatherWidget({location = "Auckland"}:
+export default async function WeatherWidget({location}:
     {location: string}
 ) {
 
@@ -16,8 +17,10 @@ export default async function WeatherWidget({location = "Auckland"}:
         <div className="mt-10">
             <div className="flex gap-2 items-center">
             <h1 className="text-3xl">{data.name}</h1>
-                      <Image width={50} height={30} alt="Weather icon" src={`https://openweathermap.org/img/wn/${data.weather[0].icon}.png`}></Image>
+   
+                      <Image width={50} height={50} alt="Weather icon" src={`https://openweathermap.org/img/wn/${data.weather[0].icon}.png`}></Image>
             </div>
+                     <LocationCheckbox location={location}/>
 
       
             <div className="flex items-center gap-2 mt-3">
