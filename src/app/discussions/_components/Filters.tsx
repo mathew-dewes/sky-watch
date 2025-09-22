@@ -15,8 +15,8 @@ export default function Filters({community}:{community: string}){
  
 
     return (
-        <Form action={""} className="flex flex-col lg:flex-row gap-5 items-center mt-5">
-            <h2>Filter communitites:</h2>
+        <Form action={""} className="flex flex-col lg:flex-row gap-5 sm:items-center my-5">
+            <h2>Filters:</h2>
             <div className='flex gap-5'>
     
    <DropDown communities={Communities} defaultValue={community}/>

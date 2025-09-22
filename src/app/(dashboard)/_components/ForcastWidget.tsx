@@ -12,7 +12,7 @@ export default async function ForcastWidget({location}:
     return (
         <div className="mt-3">
             <h2>{today}</h2>
-            <div className="mt-5 flex justify-between border-t-4">
+            <div className="mt-5 xl:flex grid grid-cols-3 gap-10 justify-between border-t-4">
                 {forcast.list.map((item, key) => {
                     return (
                         <div key={key} className="px-3 py-4 w-fit border-r-4 border-accent-500">

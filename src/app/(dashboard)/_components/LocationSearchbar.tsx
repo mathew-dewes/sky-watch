@@ -34,7 +34,6 @@ useEffect(() => {
 }, [query]);
   
 
-
   const updateUrl = (location: string) => {
     const newParams = new URLSearchParams(searchParams?.toString());
     newParams.set("location", location);

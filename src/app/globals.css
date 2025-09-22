@@ -16,14 +16,14 @@
 
 @layer base {
   h1 {
-    @apply text-2xl font-bold
+    @apply text-xl sm:text-2xl font-bold
   }
   h2{
-    @apply text-lg font-semibold
+    @apply text-base sm:text-lg font-semibold
   }
 
   p{
-    @apply text-base font-thin
+    @apply text-sm sm:text-base font-thin 
   }
 
 img{
