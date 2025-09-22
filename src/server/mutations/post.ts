@@ -6,7 +6,6 @@ import z from "zod";
 
 import { revalidatePath, revalidateTag } from "next/cache";
 import { error } from "console";
-import { redirect } from "next/navigation";
 import { getUserId } from "../auth/session";
 
 import prisma from "../db/client";
@@ -57,17 +56,17 @@ export async function deletePost(postId: string){
     const userId = await getUserId();
     if (!userId) throw error
         try {
-        const post = await prisma.post.delete({
+       await prisma.post.delete({
             where:{
-                id: postId, userId
+                id_userId:{
+                    id: postId, userId
+                }
             },
             include:{
                 Community: true
             }
         })
-        revalidateTag(`posts:community=${post.Community.name}`);
-        revalidateTag("posts:all")
-        redirect('/post/all')
+        revalidatePath('/discussions')
 
     } catch (error) {
 

@@ -98,6 +98,7 @@ model Post {
 
   Community Community @relation(fields: [communityId], references: [id])
   communityId String 
+  @@unique([id, userId])
 
   
 
@@ -129,8 +130,8 @@ model Like {
   createdAt DateTime @default(now())
   postId String
   userId String
-  user User @relation(fields: [userId], references: [id])
-  post Post @relation(fields: [postId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
   @@unique([postId, userId])
 }
 

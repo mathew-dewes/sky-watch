@@ -6,6 +6,7 @@ import LocationPin from "@/components/ui/LocationPin";
 import { getPost } from "@/server/queries/post";
 import LikeButton from "./LikeButton";
 import { getUserId } from "@/server/auth/session";
+import DeletePostButton from "./DeletePostButton";
 
 export default async function Post({id}:{id: string}){
 
@@ -27,15 +28,17 @@ export default async function Post({id}:{id: string}){
         <p>{post.description}</p>
       </div>
       <div className="mt-5 flex gap-5">
-        {/* {post.userId === userId && <DeletePostButton postId={post.id}/>} */}
+  
         <LikeCount count={post.Likes.length}/>
         <CommentCount count={1}/>
+           <LikeButton hasLiked={hasLiked} postId={post.id}/>
 
       </div>
-      <div className="mt-5">
-      <LikeButton hasLiked={hasLiked} postId={post.id}/>
-     
+      <div className="mt-10 flex justify-end">
+          {post.userId === userId && <DeletePostButton postId={post.id}/>}
       </div>
+    
+       
 
 
 
