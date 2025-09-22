@@ -8,11 +8,13 @@ export default async function ForcastWidget({location}:
 
 
     const forcast = await getWeatherForcast(location);
+    
     const today = new Date().toLocaleDateString("en-NZ", { day: "numeric", month: "long", year: "numeric", weekday: "long" });
     return (
         <div className="mt-3">
             <h2>{today}</h2>
-            <div className="mt-5 xl:flex grid grid-cols-3 gap-10 justify-between border-t-4">
+            <p className="mt-1">Rainfall: mm/hr</p>
+            <div className="mt-5 xl:flex grid grid-cols-3 gap-5 sm:gap-10 justify-between border-t-4">
                 {forcast.list.map((item, key) => {
                     return (
                         <div key={key} className="px-3 py-4 w-fit border-r-4 border-accent-500">
@@ -26,7 +28,7 @@ export default async function ForcastWidget({location}:
                                 </div>
                                 {item.rain &&  <div className="flex items-center gap-1 mt-1">
                         <Image width={15} height={15} alt="Rain icon" src={`/drop.png`}></Image>
-                              <p className="mt-1">{(item.rain)? item.rain["3h"] : "0.0"} /hr</p>
+                              <p className="mt-1">{(item.rain)? item.rain["3h"] : "0.0"}</p>
                                 </div>}
                                
   

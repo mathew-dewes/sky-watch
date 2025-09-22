@@ -14,7 +14,7 @@ export default async function page(){
     
     return (
         <div>
-            <h1 className="text-center">Create Post</h1>
+            <h1 className="text-center">Post</h1>
             <PostForm communities={communities}/>
 
         </div>

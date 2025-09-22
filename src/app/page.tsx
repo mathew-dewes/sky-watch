@@ -25,7 +25,7 @@ export default async function page({
   
   return (
     <div>
-      <h1>Current forcast</h1>
+      <h1 className="text-center sm:text-left">Home</h1>
 
       <LocationSearchbar/>
       { locationSet &&  <Suspense key={location} fallback={<LoadingSpinner text="Loading weather data..."/>}>

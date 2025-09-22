@@ -42,7 +42,10 @@ export default function CommentForm({postId}:{postId: string}) {
                 placeholder="Write a comment..."
                 rows={3}
             />
-            <Button isSubmitting={isSubmitting} submittingText="Posting..." text="Post comment" />
+            <div className="mt-3">
+    <Button isSubmitting={isSubmitting} submittingText="Posting..." text="Post comment" />
+            </div>
+        
             <ErrorMessage message={errors.comment?.message} />
             <ErrorMessage message={serverError}/>
         </form>

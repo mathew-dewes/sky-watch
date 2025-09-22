@@ -9,7 +9,7 @@ import Link from "next/link"
 
 export default async function PostFeed(){
 
-    const posts = await getPosts("all", 3)
+    const posts = await getPosts("all", "most-recent", 3)
 
 
     return (
@@ -28,7 +28,7 @@ export default async function PostFeed(){
                         <p>{post.description}</p>
                         <div className="flex gap-5 my-5 items-center">
                             <LikeCount count={post.Likes.length}/>
-                              <CommentCount count={1}/>
+                              <CommentCount count={post._count.Comments}/>
                         </div>
                         <Link href={`/discussions/${post.id}`}><Button text="Read more"/></Link>
                      

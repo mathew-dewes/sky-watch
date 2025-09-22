@@ -2,6 +2,7 @@
 
 
 import { toggleLike } from "@/server/mutations/like";
+import Image from "next/image";
 import { useTransition } from "react";
 
 export default function LikeButton({ postId, hasLiked }: { postId: string, hasLiked: boolean }) {
@@ -11,5 +12,14 @@ export default function LikeButton({ postId, hasLiked }: { postId: string, hasLi
     startTransition(() => toggleLike(postId));
   };
 
-  return <button onClick={handleClick} disabled={isPending}>{hasLiked ? "Unlike" : "Like"}</button>;
+  const image = hasLiked ? "/heart.png" : "/heart-empty.png"
+
+  return (
+    <div className="flex items-center gap-2">
+
+  <button className="cursor-pointer" onClick={handleClick} disabled={isPending}><Image alt="Heart logo" src={image} height={30} width={30}></Image></button>
+    </div>
+  ) 
+  
+;
 }

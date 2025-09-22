@@ -8,7 +8,7 @@ export default async function page(){
 
     return (
         <div>
-            <h1>Communities:</h1>
+            <h1 className="text-center sm:text-left">Communities</h1>
             <Suspense fallback={<LoadingSpinner text="Loading communities..."/>}>
                 <CommunitiyList/>
             </Suspense>
