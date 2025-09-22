@@ -19,7 +19,7 @@ export default async function CommunitiyList(){
                                     <p className="mb-5">Lorem ipsum dolor sit amet.</p>
                                     <div className="flex items-center gap-2 mb-5">
                   <p>Moderator -</p>
-                   <Avatar imageUrl={region.moderator.image} name={region.moderator.name}/>
+                   <Avatar userId={region.userId} imageUrl={region.moderator.image} name={region.moderator.name}/>
                                     </div>
                                    
                               
