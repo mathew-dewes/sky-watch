@@ -3,24 +3,22 @@
 
 import { toggleLike } from "@/app/discussions/[id]/_components/like";
 import Image from "next/image";
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 
 export default function LikeButton({ postId, hasLiked }: { postId: string, hasLiked: boolean }) {
   const [isPending, startTransition] = useTransition();
-    const [liked, setLiked] = useState(hasLiked);
+
 
 
   const handleClick = () => {
-    setLiked(prev => !prev);
     startTransition(() => {
       toggleLike(postId).catch(() => {
-        // rollback if something fails
-        setLiked(prev => !prev);
+
       });
     });
   };
 
-  const image = liked ? "/heart.png" : "/heart-empty.png"
+  const image = hasLiked ? "/heart.png" : "/heart-empty.png"
 
   return (
     <div className="flex items-center gap-2">
