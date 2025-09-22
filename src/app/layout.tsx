@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
+
 import { getUserSession } from "@/server/auth/session";
+import Navbar from "@/components/navigation/Navbar";
 
 const poppins = Poppins({
   subsets:["latin"], 
@@ -28,7 +29,7 @@ export default async function RootLayout({
         className={`${poppins.className}  antialiased`}
       >
 <Navbar session={session}/>
-        <main className="mx-10 sm:mx-20 md:mx-30 lg:mx-50 mt-10">
+        <main className="mx-6 sm:mx-20 md:mx-30 lg:mx-50 mt-10">
       {children}
         </main>
   

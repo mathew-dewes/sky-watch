@@ -15,8 +15,8 @@ export default async function Post({id}:{id: string}){
     
       if (!post) return
     return (
-        <div className="bg-lightdark-500 p-10 rounded w-2/3">
-      <Avatar name={post.user.name} />
+        <div className="bg-lightdark-500 p-4 sm:p-10 rounded lg:w-2/3">
+      <Avatar userId={post.userId} name={post.user.name} />
       <div>
 
         <DateTimeStamp date={post.createdAt} />

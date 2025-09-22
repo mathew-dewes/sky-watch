@@ -29,8 +29,8 @@ export default async function WeatherWidget({location}:
           
 
 
-            <div className="mt-5 flex gap-10">
-                  <div className="p-8 bg-lightdark-500 w-fit rounded-2xl text-center">
+            <div className="mt-5 flex flex-col sm:flex-row sm:flex-wrap  gap-10">
+                  <div className="p-8 bg-lightdark-500 sm:w-fit rounded-2xl text-center">
                     <Image className="mx-auto" width={30} height={10} alt="Temperature icon" src={`/temp.png`}></Image>
 
                     <h2 className="mt-2">Temperature</h2>
@@ -43,7 +43,7 @@ export default async function WeatherWidget({location}:
 
                 </div>
       
-                <div className="p-8 bg-lightdark-500 w-fit rounded-2xl text-center">
+                <div className="p-8 bg-lightdark-500 sm:w-fit rounded-2xl text-center">
                     <Image className="mx-auto" width={30} height={10} alt="Rain icon" src={`/rainy.png`}></Image>
 
                     <h2 className="mt-2">Perspiration</h2>
@@ -54,7 +54,7 @@ export default async function WeatherWidget({location}:
 
 
                 </div>
-                <div className="p-8 bg-lightdark-500 w-fit rounded-2xl text-center">
+                <div className="p-8 bg-lightdark-500 sm:w-fit rounded-2xl text-center">
                             <Image className="mx-auto" width={30} height={10} alt="Rain icon" src={`/wind.png`}></Image>
                     <h2 className="mt-2">Wind</h2>
                     <div className="mt-1">
@@ -66,7 +66,7 @@ export default async function WeatherWidget({location}:
 
 
                 </div>
-                <div className="p-8 bg-lightdark-500 w-fit rounded-2xl text-center">
+                <div className="p-8 bg-lightdark-500 sm:w-fit rounded-2xl text-center">
                     <div className="flex items-center">
           <Image className="mx-auto" width={30} height={10} alt="Rain icon" src={`/sunrise.png`}></Image> 
                              <p>-</p>
