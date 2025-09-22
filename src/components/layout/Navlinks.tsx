@@ -1,8 +1,9 @@
 "use client"
 
 import { usePathname } from "next/navigation";
-import { pageRoutes } from "./Navbar"
+
 import Link from "next/link";
+import { pageRoutes } from "../navigation/Navbar";
 
 
 

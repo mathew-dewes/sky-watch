@@ -1,8 +1,8 @@
-'use server'
+"use server"
 
 import { revalidatePath } from 'next/cache'
-import { getUserId } from '../auth/session'
-import prisma from '../db/client'
+import { getUserId } from '../../../../server/auth/session'
+import prisma from '../../../../server/db/client'
 
 export async function toggleLike(postId: string) {
   const userId = await getUserId()
@@ -16,20 +16,22 @@ export async function toggleLike(postId: string) {
     })
 
     if (existingLike) {
-      // User already liked → unlike
       await prisma.like.delete({
         where: { postId_userId: { userId, postId } },
       })
     } else {
-      // User hasn’t liked → like
       await prisma.like.create({
         data: { userId, postId },
       })
     }
 
-    await revalidatePath('/discussions')
+   revalidatePath(`/discussions/${postId}`)
+   revalidatePath('/discussions')
   } catch (error) {
     console.error('Error toggling like:', error)
     throw error
   }
 }
+
+
+
