@@ -2,23 +2,30 @@
 import prisma from "../db/client"
 
 
-export async function getPosts(community: string = "all", take?: number,){
+export async function getPosts(community: string = "all",   sort: string = "mostRecent", take?: number,){  
 
   const posts = await prisma.post.findMany({
     include:{
       Community: true,
       user: true,
-      _count: true,
       Likes: true,
-      Comments: true
+      Comments: true,
+      _count: {
+        select: { Likes: true, Comments: true },
+      }
     },
     where: community !== "all" ? {Community:{name:{equals: community}}} : {},
-    orderBy:{createdAt: "desc"},
+    orderBy:[
+    sort === "most-liked"
+      ? { Likes: { _count: "desc" } }
+      : sort === "most-commented"
+      ? { Comments: { _count: "desc" } }
+      : { createdAt: "desc" },
+  ],
     take
   });
   return posts
 }
-
 
 export async function getUserPosts(userId: string){
   if (!userId) return

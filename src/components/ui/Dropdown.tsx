@@ -2,23 +2,47 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { slugify } from "../helpers/format";
 
-export default function DropDown({ communities, defaultValue }: { communities: string[], defaultValue: string }) {
+export default function DropDown({ options, defaultValue, type }: { options: string[], defaultValue: string, type: "community" | "filter" }) {
   const [show, setShow] = useState(false);
-  const [selected, setSelected] = useState(defaultValue || "View All"); // default label
+  const [selected, setSelected] = useState(defaultValue);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const handleSelect = (value: string) => {
-    setSelected(value === "all" ? "View all" : value);
+    if (type == "community") {
+      if (value !== "all") {
+        setSelected("View All");
+      } else {
+        setSelected(value);
+      }
+
+    }
+
 
     const newParams = new URLSearchParams(searchParams.toString());
 
-    if (value === "all") {
-      newParams.delete("community"); // remove filter
-    } else {
-      newParams.set("community", value); // set filter
+
+    if (type === "filter") {
+        const slug = slugify(value);
+            setSelected(value);
+      if (slug === "most-recent") {
+        newParams.delete("sort"); 
+      } else {
+        newParams.set("sort", slug);
+      }
+    }
+
+    if (type === "community") {
+      if (value === "View All") {
+        setSelected("View All");
+        newParams.delete("community");
+      } else {
+              setSelected(value);
+        newParams.set("community", value);
+      }
     }
 
     router.push(`${pathname}?${newParams.toString()}`);
@@ -50,22 +74,20 @@ export default function DropDown({ communities, defaultValue }: { communities: s
             />
           </svg>
         </button>
-
-        {/* Dropdown menu */}
         <div
           id="dropdown"
           className={`${show ? "block" : "hidden"} z-10 divide-y divide-gray-100 rounded-lg shadow-sm min-w-full w-full bg-lightdark-500 absolute mt-2`}
         >
           <ul className="py-2 text-sm text-gray-200">
-            <li onClick={() => handleSelect("all")}>
+            {type === "community" && <li onClick={() => handleSelect("View All")}>
               <span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer">
                 View all
               </span>
-            </li>
-            {communities.map((community, key) => (
-              <li key={key} onClick={() => handleSelect(community)}>
+            </li>}
+            {options.map((option, key) => (
+              <li key={key} onClick={() => handleSelect(option)}>
                 <span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer">
-                  {community}
+                  {option}
                 </span>
               </li>
             ))}

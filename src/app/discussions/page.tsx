@@ -7,14 +7,15 @@ export default async function page({
   searchParams: Promise<{ [key: string]: string }>
 }){
 
-    const {community} = await searchParams
+    const {community, sort} = await searchParams
   return (
     <div>
       <h1>Discussions</h1>
       <div>
-      <Filters community={community}/>
+        <h2 className="mt-5 mb-1">Filter</h2>
+      <Filters filter={sort} community={community}/>
       </div>
-      <PostList query={community}/>
+      <PostList sort={sort} query={community}/>
     </div>
   )
 }

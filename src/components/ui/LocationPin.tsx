@@ -12,13 +12,14 @@ export default function LocationPin({name}:{
  
     return (
         
-        <Link  href={href}>
+
                <div className="flex items-center py-1">
                         <Image src={"/gps.png"} alt="Location pin" height={30} width={30}></Image>
-            <p>{name}</p>
+                                <Link  href={href}><p>{name}</p></Link>
+    
 
    
-        </div></Link>
+        </div>
  
     )
 }
