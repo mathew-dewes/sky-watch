@@ -10,11 +10,11 @@ import LikeCount from "@/components/ui/LikeCount"
 
 
 
-export default async function PostList({ query }: {
-    query: string
+export default async function PostList({ query, sort }: {
+    query: string, sort: string
 }) {
 
-    const posts = await getPosts(query);
+    const posts = await getPosts(query, sort);
 
 
 
