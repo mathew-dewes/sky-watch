@@ -31,7 +31,7 @@ export default function Navbar({ session }:
         <nav className="flex justify-between items-center h-20 px-6 sm:px-20 md:px-30 lg:px-50 bg-lightdark-500 text-white shadow-xl">
             <Link href={'/'}><h1 className="text-accent-500 font-bold text-2xl">Sky Watch</h1></Link>
     
-    <ul className="lg:flex gap-20 hidden">
+    <ul className="lg:flex gap-10 xl:gap-20 hidden">
 
                 {session && pageRoutes.map((route, key) => {
                     return <Navlink href={route.href} text={route.text} key={key} />

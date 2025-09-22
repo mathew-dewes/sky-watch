@@ -9,10 +9,12 @@ export default function Navlink({href, text}:
 
     const pathName = usePathname();
     
-    function isActive(link:string){
-        return pathName == link ? true : false
-
-    }
+function isActive(link: string) {
+  if (link === "/") {
+    return pathName === "/"; 
+  }
+  return pathName.startsWith(link);
+}
 
     return <Link className={`hover:text-accent-500
         ${isActive(href) ? "text-accent-500" : ""}

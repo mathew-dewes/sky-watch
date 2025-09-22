@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { getUserSession } from "@/server/auth/session";
 import Navbar from "@/components/navigation/Navbar";
+import Footer from "@/components/layout/Footer";
 
 const poppins = Poppins({
   subsets:["latin"], 
@@ -32,6 +33,7 @@ export default async function RootLayout({
         <main className="mx-6 sm:mx-20 md:mx-30 lg:mx-50 mt-10">
       {children}
         </main>
+        <Footer/>
   
       </body>
     </html>

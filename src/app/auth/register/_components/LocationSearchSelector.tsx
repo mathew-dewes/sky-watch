@@ -72,13 +72,16 @@ useEffect(() => {
         </div>
         <input
         {...register("location")}
+        required
           type="text"
           id="city-search"
           className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Type a city..."
           value={query}
           onChange={(e) => {
+            const val = e.target.value;
             setQuery(e.target.value);
+            setValue("location", val, { shouldValidate: true }); 
             setShowDropdown(true);
           }}
           onFocus={() => setShowDropdown(true)}

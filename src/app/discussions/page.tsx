@@ -10,7 +10,7 @@ export default async function page({
     const {community, sort} = await searchParams
   return (
     <div>
-      <h1>Discussions</h1>
+      <h1 className="text-center sm:text-left">Discussions</h1>
       <div>
         <h2 className="mt-5 mb-1">Filter</h2>
       <Filters filter={sort} community={community}/>

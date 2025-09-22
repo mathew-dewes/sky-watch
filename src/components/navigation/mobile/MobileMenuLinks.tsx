@@ -18,7 +18,10 @@ export default function MobileMenuLinks({ isMenuOpen, onClose }: ButtonProps) {
 
      const pathName = usePathname();
          const router = useRouter();
+
+
         async function handleSignOut(){
+          onClose()
              await Logout();
              router.push("/auth/login")
          }
