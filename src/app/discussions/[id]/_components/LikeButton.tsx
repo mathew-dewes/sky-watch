@@ -1,13 +1,23 @@
 "use client";
 
 
-import { toggleLike } from "@/app/discussions/[id]/_components/like";
+import { getLiked, toggleLike } from "@/app/discussions/[id]/_components/like";
 import Image from "next/image";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 
 export default function LikeButton({ postId, hasLiked }: { postId: string, hasLiked: boolean }) {
   const [isPending, startTransition] = useTransition();
     const [liked, setLiked] = useState(hasLiked);
+
+
+  useEffect(() => {
+    startTransition(async () => {
+      const liked = await getLiked(postId);
+      setLiked(liked);
+    });
+  }, [postId]);
+
+  if (liked === null) return null; // loading
 
 
   const handleClick = () => {
