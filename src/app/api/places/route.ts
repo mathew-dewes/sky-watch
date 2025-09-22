@@ -11,7 +11,6 @@ export async function GET(req: Request) {
       { status: 400 }
     );
   }
-
   const apiKey = process.env.GOOGLE_PLACES_API_KEY;
   const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&components=country:NZ&key=${apiKey}`;
   try {

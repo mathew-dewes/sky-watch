@@ -24,7 +24,7 @@ useEffect(() => {
     return;
   }
 
-  const timeout = setTimeout(async () => {
+  const timeout = setTimeout(async () => {    
     const res = await fetch(`/api/places?input=${encodeURIComponent(query)}`);
     const data = await res.json();
     setSuggestions(data.predictions || []);
@@ -51,7 +51,8 @@ useEffect(() => {
   }
 
   const handleSelect = (city: string) => {
-    setQuery(city);
+    const location = city.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    setQuery(location);
     setShowDropdown(false);
   };
 
