@@ -6,13 +6,15 @@ import HyperLink from '@/components/ui/HyperLink';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import z from 'zod';
-import ErrorMessage from '../../../../../components/ui/ErrorMessage';
+
 import { useState } from 'react';
-import Providers from '../../../_components/SocialLoginProviders';
+
 import { useRouter } from 'next/navigation';
 import { RegisterUser } from '@/server/mutations/auth';
 import { registerUserSchema } from '@/server/types/schemas';
 import LocationSearchSelector from './LocationSearchSelector';
+import Providers from '../../_components/SocialLoginProviders';
+import ErrorMessage from '@/components/ui/ErrorMessage';
 
 
 
