@@ -2,7 +2,7 @@
 
 import z from "zod";
 
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { error } from "console";
 
 import { getUserId } from "../auth/session";
@@ -19,7 +19,7 @@ export async function postComment(values: z.infer<typeof commentSchema>, postId:
                 content: comment, userId, postId
             }
         });
- revalidatePath(`/discussions/${postId}`)
+
             return {
             status: "success", message: "Post created successfully"
         }
@@ -29,6 +29,8 @@ export async function postComment(values: z.infer<typeof commentSchema>, postId:
         }
 
         
+    } finally{
+ revalidatePath(`/discussions/${postId}`)
     }
 
 }
@@ -41,13 +43,17 @@ export async function deleteComment(commentId: string, postId: string){
     try {
    await prisma.comment.delete({
             where:{
-                id: commentId, userId,
+                id_userId:{
+                    userId, id: commentId
+                }
             }
         });
 
-  revalidateTag(`comments:${postId}`)
+
     } catch (error) {
                console.log(error);
+    } finally{
+  revalidatePath(`/discussions/${postId}`)
     }
 }
 

@@ -83,6 +83,7 @@ model Comment {
   postId String
   post Post @relation(fields: [postId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
+  @@unique([id, userId])
  
 }
 

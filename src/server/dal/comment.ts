@@ -7,7 +7,7 @@ import { getComments } from "../queries/comment";
    
 export async function getCachedComments(postId: string){
     const func = cache(getComments, ['comments', 'postId'],
-        {tags: [`comments:${postId}`]}
+        {revalidate:3600}
     );
     return await func(postId)
 }

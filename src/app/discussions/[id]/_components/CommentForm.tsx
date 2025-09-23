@@ -7,6 +7,7 @@ import { commentSchema } from "@/server/types/schemas";
 
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
@@ -23,15 +24,19 @@ export default function CommentForm({postId}:{postId: string}) {
 
         
     });
+    
+const router = useRouter();
 
       const onSubmit = async (values: FormFields) => {
     const result = await postComment(values, postId);
+    
 
     if (result?.status === "error"){
         setServerError(result.message);
     } 
-        reset()
-        setServerError("")
+        reset();
+        setServerError("");
+        router.refresh()
     
     }
     return (

@@ -1,6 +1,7 @@
 "use client"
 import Button from "@/components/ui/Button"
 import { deleteComment } from "@/server/mutations/comment";
+import { useRouter } from "next/navigation";
 
 
 
@@ -16,6 +17,9 @@ type Props = {
 export default function DeleteCommentButton({ commentId, postId }: Props) {
   const [loading, setLoading] = useState(false);
 
+      
+  const router = useRouter();
+
     async function handleDelete(): Promise<void> {
             setLoading(true);
             try {
@@ -25,6 +29,8 @@ export default function DeleteCommentButton({ commentId, postId }: Props) {
                 
             } finally{
                       setLoading(false);
+                      router.refresh()
+
             }
     
 
