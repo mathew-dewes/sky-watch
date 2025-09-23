@@ -7,7 +7,7 @@ import prisma from "../db/client";
 
 export async function getComments(postId: string){
 
-    const comments = prisma.comment.findMany({
+    return prisma.comment.findMany({
             where:{
                 postId
             },
@@ -19,6 +19,6 @@ export async function getComments(postId: string){
             }
         });
 
-        return comments
+     
 
 }

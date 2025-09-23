@@ -19,15 +19,16 @@ export async function toggleLike(postId: string) {
     if (existingLike) {
       await prisma.like.delete({
         where: { postId_userId: { userId, postId } },
-      })
+      });
+        revalidatePath(`/discussions/${postId}`)
     } else {
       await prisma.like.create({
         data: { userId, postId },
       })
+        revalidatePath(`/discussions/${postId}`)
     }
 
-   revalidatePath(`/discussions/${postId}`)
-   revalidatePath('/discussions')
+
   } catch (error) {
     console.error('Error toggling like:', error);
     return {error: "Server error"}

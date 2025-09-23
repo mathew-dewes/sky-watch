@@ -19,7 +19,7 @@ export async function postComment(values: z.infer<typeof commentSchema>, postId:
                 content: comment, userId, postId
             }
         });
- revalidatePath('/post')
+
             return {
             status: "success", message: "Post created successfully"
         }
@@ -29,6 +29,8 @@ export async function postComment(values: z.infer<typeof commentSchema>, postId:
         }
 
         
+    } finally{
+ revalidatePath(`/discussions/${postId}`)
     }
 
 }
@@ -41,14 +43,17 @@ export async function deleteComment(commentId: string, postId: string){
     try {
    await prisma.comment.delete({
             where:{
-                id: commentId, userId,
+                id_userId:{
+                    userId, id: commentId
+                }
             }
         });
 
-  revalidatePath(`/post/${postId}`);
-  revalidatePath("/posts"); 
+
     } catch (error) {
                console.log(error);
+    } finally{
+  revalidatePath(`/discussions/${postId}`)
     }
 }
 
