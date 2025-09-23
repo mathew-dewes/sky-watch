@@ -35,5 +35,16 @@ export async function toggleLike(postId: string) {
   }
 }
 
+export async function getLiked(postId: string) {
+  const userId = await getUserId();
+  if (!userId) return false;
+
+  const existing = await prisma.like.findUnique({
+    where: { postId_userId: { postId, userId } },
+  });
+
+  return !!existing;
+}
+
 
 

@@ -2,12 +2,13 @@
 
 import ErrorMessage from "@/components/ui/ErrorMessage";
 import { toggleLike } from "@/server/mutations/like";
-import Image from "next/image";
 import { useActionState } from "react";
+import Image from "next/image";
+
+
 
 export default function LikeButton({ postId, hasLiked }: { postId: string, hasLiked: boolean }) {
  const [state, formAction, isPending] = useActionState(()=> toggleLike(postId), null)
-
 
 
   const image = hasLiked ? "/heart.png" : "/heart-empty.png"
