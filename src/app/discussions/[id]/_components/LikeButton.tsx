@@ -1,30 +1,35 @@
-"use client";
+"use client"
 
-
-import { toggleLike } from "@/app/discussions/[id]/_components/like";
+import ErrorMessage from "@/components/ui/ErrorMessage";
+import { toggleLike } from "@/server/mutations/like";
 import Image from "next/image";
-import { useTransition } from "react";
+import { useActionState } from "react";
 
 export default function LikeButton({ postId, hasLiked }: { postId: string, hasLiked: boolean }) {
-  const [isPending, startTransition] = useTransition();
+ const [state, formAction, isPending] = useActionState(()=> toggleLike(postId), null)
 
 
-
-  const handleClick = () => {
-    startTransition(() => {
-      toggleLike(postId).catch(() => {
-
-      });
-    });
-  };
 
   const image = hasLiked ? "/heart.png" : "/heart-empty.png"
 
   return (
-    <div className="flex items-center gap-2">
+    <div>
+  <form action={formAction} className={`flex items-center gap-2`}>
+             <label className="mb-2" htmlFor=""><ErrorMessage message={state?.error}/></label>
+               <button className="cursor-pointer" disabled={isPending}><Image alt="Heart logo" src={image} height={30} width={30}></Image></button>
+  
 
-      <button className="cursor-pointer" onClick={handleClick} disabled={isPending}><Image alt="Heart logo" src={image} height={30} width={30}></Image></button>
+ 
+
+
+    </form>
+   
     </div>
+
+
+ 
+
+  
   )
 
     ;
