@@ -38,10 +38,11 @@ export async function RegisterUser(values: z.infer<typeof registerUserSchema>) {
     await prisma.user.update({
         data:{
             bio,
-            Location:{
-                create:{
-                    name: location
-                }
+         Location: {
+          connectOrCreate: {
+            where: { name: location }, 
+            create: { name: location },
+          },
             }
         },
         where:{

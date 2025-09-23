@@ -10,16 +10,17 @@ export async function updateLocation(location: string){
     if (!userId) return
 
     try {
-    await prisma.location.upsert({
-            update:{
-               name: location
-            },
-        create: { userId, name: location },
-            where:{
-                userId
-            }
-
-        });
+await prisma.user.update({
+  where: { id: userId },
+  data: {
+    Location: {
+      connectOrCreate: {
+        where: { name: location },   // unique field on Location
+        create: { name: location },
+      },
+    },
+  },
+});
 
         revalidatePath('/discussions')
 
