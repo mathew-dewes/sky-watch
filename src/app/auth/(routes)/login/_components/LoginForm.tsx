@@ -13,7 +13,7 @@ import ErrorMessage from '@/components/ui/ErrorMessage';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import Providers from '../../_components/SocialLoginProviders';
+import Providers from '../../../_components/SocialLoginProviders';
 import { LoginUser } from '@/server/mutations/auth';
 import { loginUserSchema } from '@/server/types/schemas';
 
@@ -68,6 +68,7 @@ export default function LoginForm() {
             <Button text='Login' isSubmitting={isSubmitting} submittingText='Logging in' />
             <p className="mt-5 text-red-500">{serverError}</p>
                     <HyperLink href='/auth/register' text='Dont have an account? CLICK HERE to Register' />
+                    <HyperLink href='/auth/forgot-password' text='Forgot your password? CLICK HERE to Reset' />
 
             <div className='mt-10'>
                 <Providers isSubmitting={isSubmitting}/>
