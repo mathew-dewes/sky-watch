@@ -13,6 +13,9 @@ export const loginUserSchema = z.object({
     password: z.string().min(8, "Password must be 8 or more characters"),
 });
 
+
+
+
 export interface WeatherResponse {
   coord: {
     lon: number;

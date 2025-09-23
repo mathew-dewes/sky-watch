@@ -130,6 +130,19 @@ export async function LoginUser(values: z.infer<typeof loginUserSchema>) {
 
 }
 
+
+export async function sendEmailResetEmail(email: string){
+const data = await auth.api.requestPasswordReset({
+    body: {
+        email: email, // required
+        redirectTo: "https://example.com/reset-password",
+    },
+});
+
+console.log(data);
+
+}
+
 export async function Logout() {
 
     const result = await auth.api.signOut({
