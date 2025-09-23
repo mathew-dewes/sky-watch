@@ -16,7 +16,9 @@ export default async function page({
   const {location} = await searchParams;
 
   const defaultLocation = await getUserLocation();
-  const locationSet = location || defaultLocation
+  const locationSet = location || defaultLocation;
+
+  
 
 
 
