@@ -4,15 +4,14 @@ import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import CommentForm from "./_components/CommentForm";
 import CommentList from "./_components/CommentList";
 
-export const dynamic = "force-dynamic";
-
-
 export default async function page({params}:
     {params: Promise<{id: string}>}){
 
         
     const { id } = await params;
 
+
+  
         return (
             <div>
                 <Suspense fallback={<LoadingSpinner text="Loading post..."/>}>

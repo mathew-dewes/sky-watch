@@ -2,7 +2,7 @@
 
 import z from "zod";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { error } from "console";
 
 import { getUserId } from "../auth/session";
@@ -19,7 +19,7 @@ export async function postComment(values: z.infer<typeof commentSchema>, postId:
                 content: comment, userId, postId
             }
         });
- revalidatePath('/post')
+ revalidatePath(`/discussions/${postId}`)
             return {
             status: "success", message: "Post created successfully"
         }
@@ -45,8 +45,7 @@ export async function deleteComment(commentId: string, postId: string){
             }
         });
 
-  revalidatePath(`/post/${postId}`);
-  revalidatePath("/posts"); 
+  revalidateTag(`comments:${postId}`)
     } catch (error) {
                console.log(error);
     }

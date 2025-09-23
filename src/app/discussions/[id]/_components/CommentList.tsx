@@ -1,8 +1,11 @@
 import Avatar from "@/components/ui/Avatar";
 import DateTimeStamp from "@/components/ui/DateTimeStamp";
-import { getComments } from "@/server/queries/comment";
+
 import DeleteCommentButton from "./DeleteCommentButton";
 import { getUserId } from "@/server/auth/session";
+import { getCachedComments } from "@/server/dal/comment";
+
+
 
 
 
@@ -10,7 +13,9 @@ import { getUserId } from "@/server/auth/session";
 export default async function CommentList({ postId }: { postId: string }) {
 
     const userId = await getUserId()
-    const comments = await getComments(postId)
+  const comments = await getCachedComments(postId);
+
+  console.log(comments);
 
 
     if (comments.length === 0) return <p>There are no comments</p>
