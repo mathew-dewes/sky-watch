@@ -12,7 +12,7 @@ export async function GET(req: Request) {
     );
   }
   const apiKey = process.env.GOOGLE_PLACES_API_KEY;
-  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&components=country:NZ&key=${apiKey}`;
+  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&components=country:NZ&key=${apiKey}&types=(cities)`;
   try {
     const res = await fetch(url);
     const data : PlacesAutocompleteResponse = await res.json();

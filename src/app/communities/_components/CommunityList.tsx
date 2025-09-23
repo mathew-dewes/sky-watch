@@ -1,4 +1,3 @@
-import Avatar from "@/components/ui/Avatar"
 import Button from "@/components/ui/Button";
 import LocationPin from "@/components/ui/LocationPin";
 import { getCommunities } from "@/server/queries/community";
@@ -19,16 +18,19 @@ export default async function CommunitiyList() {
                         <div className="flex items-center">
                             <LocationPin name={""} />
                             <h1>{region.name}</h1>
+                   
                         </div>
+                                 <p className="mt-2">Total posts: {region._count.Posts}</p>
 
-                        <p className="mb-5">Lorem ipsum dolor sit amet.</p>
-                        <div className="flex items-center gap-2 mb-5">
-                            <p>Moderator -</p>
-                            <Avatar userId={region.userId} imageUrl={region.moderator.image} name={region.moderator.name} />
-                        </div>
+ 
+                  
+                    <div className="mt-5">
+         <Link href={`/discussions?community=${region.name}`}><Button text="View posts" /></Link>
 
 
-                        <Link href={`/discussions?community=${region.name}`}><Button text="View posts" /></Link>
+                    </div>
+   
+            
                     </div>
                 )
             })}

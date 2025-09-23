@@ -69,7 +69,7 @@ export default function LoginForm() {
             <Button text='Login' isSubmitting={isSubmitting} submittingText='Logging in' />
             <p className="mt-5 text-red-500">{serverError}</p>
                     <HyperLink href='/auth/register' text='Dont have an account? CLICK HERE to Register' />
-                    <HyperLink href='/auth/forgot-password' text='Forgot your password? CLICK HERE to Reset' />
+     
 
             <div className='mt-10'>
                 <Providers isSubmitting={isSubmitting}/>
