@@ -11,6 +11,8 @@ export default async function PostFeed(){
 
     const posts = await getPosts("all", "most-recent", 3)
 
+    if (posts.length == 0) return <p className="mt-2">There are no posts to show at this time</p>
+
 
     return (
        <div className="flex gap-10 flex-wrap">

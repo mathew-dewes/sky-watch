@@ -42,8 +42,9 @@ useEffect(() => {
 
 
   const handleSelect = (city: string) => {
-    setQuery(city);
-    setValue("location", city, { shouldValidate: true });
+    const location = city.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    setQuery(location);
+    setValue("location", location, { shouldValidate: true });
     setShowDropdown(false);
   };
 

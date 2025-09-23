@@ -4,7 +4,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -23,7 +23,8 @@ model User {
   Posts         Post[]
   Likes         Like[]
   Community     Community?
-  Location Location?
+  locationId String?
+  Location Location? @relation(fields: [locationId], references: [id])
   bio String?
 
   @@unique([email])
@@ -120,8 +121,7 @@ model Location{
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   name String @unique
-  userId String @unique
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  users User[]
 
 }
 
