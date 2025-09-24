@@ -12,7 +12,7 @@ export default function GithubButton({isLoading}:{
     return         <button type="button"
               onClick={() => signInSocial("github")}
               disabled={isLoading}
-              className="w-fit cursor-pointer flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg  bg-gray-900 text-white hover:bg-gray-800 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="w-fit cursor-pointer flex items-center justify-center px-4 py-3 rounded-lg shadow-sm bg-gray-900 text-white hover:bg-gray-800 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               <svg
                 className="w-5 h-5 mr-3"
