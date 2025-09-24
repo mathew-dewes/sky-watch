@@ -38,7 +38,7 @@ export default async function Post({ id }: { id: string }) {
 
       </div>
       <div className="mt-10 flex justify-end">
-        {post.userId === userId && <DeletePostButton postId={post.id} />}
+        {post.userId == userId && <DeletePostButton postId={post.id} />}
       </div>
 
 

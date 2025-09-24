@@ -22,3 +22,15 @@ export async function getCommunities(){
 
 }
 
+
+export async function getCommunityNames(){
+const communities = await prisma.community.findMany({
+  select:{
+    name: true
+  }
+});
+
+return communities
+
+}
+

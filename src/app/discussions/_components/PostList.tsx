@@ -16,6 +16,10 @@ export default async function PostList({ query, sort }: {
 
     const posts = await getPosts(query, sort);
 
+    
+
+
+
 
 
     return (

@@ -54,7 +54,7 @@ export default function DropDown({ options, defaultValue, type }: { options: str
       <div className="relative inline-block">
         <button
           onClick={() => setShow(!show)}
-          className="cursor-pointer text-white bg-accent-500 hover:ring-4 focus:outline-none rounded-lg pl-3 pr-8 py-2.5 text-center inline-flex items-center"
+          className="cursor-pointer text-white text-nowrap bg-accent-500 hover:ring-4 focus:outline-none rounded-lg pl-5 pr-10 py-2.5 text-center inline-flex items-center"
           type="button"
         >
           {selected}
@@ -86,7 +86,7 @@ export default function DropDown({ options, defaultValue, type }: { options: str
             </li>}
             {options.map((option, key) => (
               <li key={key} onClick={() => handleSelect(option)}>
-                <span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer">
+                <span className="block text-nowrap px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer">
                   {option}
                 </span>
               </li>
